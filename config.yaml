@@ -1,0 +1,51 @@
+model_dir: D:/onmt/model
+# 数据参数
+data:
+  train_features_file: D:/onmt/data/source.txt
+  train_labels_file: D:/onmt/data/target.txt
+  eval_features_file: D:/onmt/data/source_eval.txt
+  eval_labels_file: D:/onmt/data/target_eval.txt
+  source_vocabulary: D:/onmt/source_vocab.txt
+  target_vocabulary: D:/onmt/target_vocab.txt
+
+# 模型参数
+model:
+  name: Transformer
+  num_layers: 4
+  hidden_size: 512
+  filter_size: 2048
+  num_heads: 4
+
+# 训练参数
+train:
+  batch_size: 64
+  num_steps: 100000
+  save_checkpoints_steps: 1000
+  keep_checkpoint_max: 5
+  learning_rate: 2.0
+  warmup_steps: 5000
+  decay_method: NoamDecay
+
+# 评估参数
+eval:
+  batch_size: 32
+  batch_type: examples
+  steps: 5000
+  save_eval_predictions: D:/onmt/models/eval
+  scorers: bleu
+  export_on_best: bleu
+
+
+# 推理参数
+infer:
+  batch_size: 32
+
+# 词汇表参数
+vocabulary:
+  source: D:/onmt/source_vocab.txt
+  target: D:/onmt/target_vocab.txt
+  source_embedding_size: 512
+  target_embedding_size: 512
+
+
+save_predictions: D:/onmt/output/predictions.txt
